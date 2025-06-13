@@ -10,5 +10,6 @@ This project is a simple scientific calculator application.
 
 ## Go Game
 The repository now includes a simple Go program located in `go_game/go_game.py`.
-Run it with `python -m go_game.go_game` to play against a basic random-move AI
-on a 9x9 board.
+Run `python -m go_game.go_game` to play against a basic random-move AI on the
+standard 19x19 board. To watch two AIs play each other, run
+`python -m go_game.go_game --ai-vs-ai`.

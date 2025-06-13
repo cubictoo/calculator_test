@@ -1,9 +1,10 @@
 import random
+import sys
 
 class Board:
     """Simple Go board implementation supporting basic play and capture."""
 
-    def __init__(self, size=9):
+    def __init__(self, size=19):
         self.size = size
         self.board = [['.' for _ in range(size)] for _ in range(size)]
 
@@ -85,8 +86,38 @@ class Board:
         print()
 
 
+def ai_vs_ai_game(size=19, move_limit=200, verbose=True):
+    """Run a game where two AIs play against each other."""
+    board = Board(size)
+    current = 'black'
+    passes = 0
+    moves = 0
+    while passes < 2 and moves < move_limit:
+        coord = board.generate_random_move(current)
+        if coord is None:
+            if verbose:
+                print(f"{current} AI passes.")
+            passes += 1
+        else:
+            if verbose:
+                print(f"{current} AI plays at {coord[0]} {coord[1]}")
+            passes = 0
+        if verbose:
+            board.print_board()
+        current = 'white' if current == 'black' else 'black'
+        moves += 1
+    if verbose:
+        print('AI vs AI game over.')
+        board.print_board()
+    return board
+
+
 def main():
-    board = Board(9)
+    if len(sys.argv) > 1 and sys.argv[1] == '--ai-vs-ai':
+        ai_vs_ai_game()
+        return
+
+    board = Board(19)
     current = 'black'
     passes = 0
     while passes < 2:
